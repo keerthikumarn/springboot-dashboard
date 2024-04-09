@@ -1,8 +1,6 @@
 HELP.md
 target/
 .mvn/wrapper/maven-wrapper.jar
-mvnw.cmd
-mvnw
 **/src/main/**/target/
 **/src/test/**/target/
 
@@ -16,6 +14,6 @@ mvnw
 .springBeans
 .sts4-cache
 
-
-### VS Code ###
-.vscode/
+# Maven wrapper files
+mvnw.cmd
+mvnw
