@@ -27,10 +27,10 @@ public class DashboardServiceImpl implements DashboardService {
 
 	@Autowired
 	private OrderReceivedRepository orderReceivedRepo;
-	
+
 	@Autowired
 	private OrderCollectionStatusRepository orderCollectionStatusRepo;
-	
+
 	@Autowired
 	private EmployeeInfoRepository employeeInfoRepo;
 
@@ -81,7 +81,7 @@ public class DashboardServiceImpl implements DashboardService {
 
 	@Override
 	public EmployeeInfo addEmployee(EmployeeInfo employeeInfo) {
-		return null;
+		return employeeInfoRepo.save(employeeInfo);
 	}
 
 	@Override
@@ -91,12 +91,12 @@ public class DashboardServiceImpl implements DashboardService {
 
 	@Override
 	public EmployeeInfo updateEmployee(EmployeeInfo employeeInfo) {
-		return null;
+		return employeeInfoRepo.save(employeeInfo);
 	}
 
 	@Override
 	public void deleteEmployee(EmployeeInfo employeeInfo) {
-
+		employeeInfoRepo.delete(employeeInfo);
 	}
 
 }
