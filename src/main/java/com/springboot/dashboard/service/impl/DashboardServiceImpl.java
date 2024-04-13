@@ -1,9 +1,13 @@
 package com.springboot.dashboard.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
 import com.springboot.dashboard.entity.CompanyRevenue;
 import com.springboot.dashboard.entity.EmployeeInfo;
@@ -17,6 +21,7 @@ import com.springboot.dashboard.repository.OrderReceivedRepository;
 import com.springboot.dashboard.repository.ProductCategoryRepository;
 import com.springboot.dashboard.service.DashboardService;
 
+@Service
 public class DashboardServiceImpl implements DashboardService {
 
 	@Autowired
@@ -66,12 +71,34 @@ public class DashboardServiceImpl implements DashboardService {
 
 	@Override
 	public Map<String, Object> getBestCategory() {
-		return null;
+		Map<String, Object> bestProductMap = new HashMap<>();
+		List<ProductCategory> bestCategoryList = productCategoryRepo.findByBestCategory(true);
+		List<String> label = new ArrayList<>();
+		List<String> percent = new ArrayList<>();
+		bestCategoryList.stream().forEach(prodCategory -> {
+			label.add(prodCategory.getCategoryName());
+			percent.add(String.valueOf(prodCategory.getPercentage()));
+		});
+		bestProductMap.put("bcLabels", label.toString());
+		bestProductMap.put("bcPercents", percent.toString());
+		return bestProductMap;
 	}
 
 	@Override
 	public Map<String, Object> getAllOrderReceived() {
-		return null;
+		List<OrderReceived> orderReceivedList = orderReceivedRepo.findAll(Sort.by("pk"));
+		Map<String, Object> orderReceivedMap = new HashMap<>();
+
+		List<String> label = new ArrayList<>();
+		List<String> order = new ArrayList<>();
+
+		orderReceivedList.stream().forEach(orderReceived -> {
+			label.add(orderReceived.getDateReceived());
+			order.add(String.valueOf(orderReceived.getOrderReceived()));
+		});
+		orderReceivedMap.put("orLabels", label.toString());
+		orderReceivedMap.put("orOrders", order.toString());
+		return orderReceivedMap;
 	}
 
 	@Override

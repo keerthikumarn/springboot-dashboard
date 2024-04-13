@@ -8,4 +8,6 @@ import com.springboot.dashboard.entity.EmployeeInfo;
 @Repository
 public interface EmployeeInfoRepository extends JpaRepository<EmployeeInfo, Long> {
 
+	public EmployeeInfo findByPk(final String pk);
+
 }
