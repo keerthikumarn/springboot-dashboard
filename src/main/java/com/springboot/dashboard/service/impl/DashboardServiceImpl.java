@@ -1,10 +1,14 @@
 package com.springboot.dashboard.service.impl;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.curator.shaded.com.google.common.util.concurrent.AtomicDouble;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -103,6 +107,27 @@ public class DashboardServiceImpl implements DashboardService {
 
 	@Override
 	public Map<String, Object> getOrderCollection() {
+		List<OrderCollectionStatus> orderStatusList = orderCollectionStatusRepo.findAll();
+		Map<String, Object> orderStatusMap = new HashMap<>();
+		Locale locale = new Locale("en", "US");
+		NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
+
+		AtomicInteger totalNewOrders = new AtomicInteger(0);
+		AtomicDouble totalRevenue = new AtomicDouble(0.0);
+		AtomicInteger totalShippedOrders = new AtomicInteger(0);
+		AtomicInteger totalReturnInitiatedOrders = new AtomicInteger(0);
+
+		for (OrderCollectionStatus orderCollectionStatus : orderStatusList) {
+			totalNewOrders.getAndAdd(orderCollectionStatus.getNewOrders());
+			totalRevenue += orderCollectionStatus.getRevenue();
+			totalShippedOrders += orderCollectionStatus.getShipped();
+			totalReturnInitiatedOrders += orderCollectionStatus.getReturned();
+		}
+
+		orderStatusMap.put("totalNewOrders", totalNewOrders);
+		orderStatusMap.put("totalRevenue", currencyFormat.format(totalRevenue));
+		orderStatusMap.put("totalShippedOrders", totalShippedOders);
+		orderStatusMap.put("totalReturnInitiatedOrders", totalReturnInitiatedOrders);
 		return null;
 	}
 
