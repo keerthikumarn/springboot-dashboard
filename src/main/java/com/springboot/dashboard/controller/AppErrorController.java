@@ -49,7 +49,7 @@ public class AppErrorController implements ErrorController {
 
 	private Map<String, Object> getErrorAttributes(HttpServletRequest request, boolean includeStackTrace) {
 		WebRequest webRequest = new ServletWebRequest(request);
-		return this.errorAttributes.getErrorAttributes(webRequest, includeStackTrace);
+		return this.errorAttributes.getErrorAttributes(webRequest, null);
 	}
 
 	private HttpStatus getStatus(HttpServletRequest request) {
