@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-@RestController
+//@RestController
 public class AppErrorController implements ErrorController {
 
 	private final static String ERROR_PATH = "/error";
