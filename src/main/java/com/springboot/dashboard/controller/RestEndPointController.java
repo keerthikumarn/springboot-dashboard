@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.dashboard.entity.EmployeeInfo;
@@ -28,6 +29,17 @@ public class RestEndPointController {
 			return "Employee data saved successfully";
 		} else {
 			return "Error in saving employee data";
+		}
+	}
+
+	@RequestMapping(value = "/employee", method = RequestMethod.DELETE)
+	public String employeeAdd(@RequestParam(name = "empId", required = true) String pk) {
+		try {
+			dashboardService.deleteEmployee(dashboardService.getEmployee(pk));
+			return "Deleting employee successfully";
+
+		} catch (Exception e) {
+			return "Error in deleting employee";
 		}
 	}
 
