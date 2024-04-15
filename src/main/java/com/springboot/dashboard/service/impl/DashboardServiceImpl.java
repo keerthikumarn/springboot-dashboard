@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -82,7 +80,7 @@ public class DashboardServiceImpl implements DashboardService {
 		NumberFormat currencyFormat = getCurrencyNumberFormat();
 
 		for (CompanyRevenue companyRevenue : companyRevenueList) {
-			label.add(companyRevenue.getMonth());
+			label.add(companyRevenue.getRevenueMonth());
 			revenue.add(String.valueOf(companyRevenue.getRevenue()));
 			totalExpense += companyRevenue.getExpense();
 			totalMargin += companyRevenue.getMargins();
@@ -162,7 +160,7 @@ public class DashboardServiceImpl implements DashboardService {
 
 	@Override
 	public EmployeeInfo getEmployee(String pk) {
-		return employeeInfoRepo.findByPk(pk);
+		return employeeInfoRepo.findByPk(Long.valueOf(pk));
 	}
 
 	@Override
