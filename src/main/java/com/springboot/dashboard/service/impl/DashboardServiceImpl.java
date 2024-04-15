@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -69,7 +70,31 @@ public class DashboardServiceImpl implements DashboardService {
 
 	@Override
 	public Map<String, Object> getTodayRevenueDash() {
-		return null;
+		Map<String, Object> companyRevenueMap = new HashMap<>();
+		List<CompanyRevenue> companyRevenueList = companyReveneueRepo.findAll();
+
+		List<String> label = new ArrayList<>();
+		List<String> revenue = new ArrayList<>();
+		double totalMargin = 0;
+		double totalExpense = 0;
+		double totalRevenue = 0;
+
+		NumberFormat currencyFormat = getCurrencyNumberFormat();
+
+		for (CompanyRevenue companyRevenue : companyRevenueList) {
+			label.add(companyRevenue.getMonth());
+			revenue.add(String.valueOf(companyRevenue.getRevenue()));
+			totalExpense += companyRevenue.getExpense();
+			totalMargin += companyRevenue.getMargins();
+			totalRevenue += companyRevenue.getRevenue();
+		}
+
+		companyRevenueMap.put("crLabels", label.toString());
+		companyRevenueMap.put("crRevenue", revenue.toString());
+		companyRevenueMap.put("totalExpense", currencyFormat.format(totalExpense));
+		companyRevenueMap.put("totalMargin", currencyFormat.format(totalMargin));
+		companyRevenueMap.put("totalRevenue", currencyFormat.format(totalRevenue));
+		return companyRevenueMap;
 	}
 
 	@Override
@@ -148,6 +173,11 @@ public class DashboardServiceImpl implements DashboardService {
 	@Override
 	public void deleteEmployee(EmployeeInfo employeeInfo) {
 		employeeInfoRepo.delete(employeeInfo);
+	}
+
+	private NumberFormat getCurrencyNumberFormat() {
+		Locale locale = new Locale("en", "US");
+		return NumberFormat.getCurrencyInstance(locale);
 	}
 
 }
