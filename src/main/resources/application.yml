@@ -1,7 +1,4 @@
 spring:
-  profiles:
-    active: dev
-
   thymeleaf:
     cache: false
     enabled: true
@@ -19,14 +16,9 @@ spring:
 
 logging:
   level:
-    #    org.springframework.web: DEBUG
-    #    guru.springframework.controllers: DEBUG
     org.hibernate: DEBUG
     ROOT: info
 
----
-spring:
-  profiles: dev
 
   datasource:
     url: jdbc:h2:file:~/h2db;DB_CLOSE_ON_EXIT=FALSE;IFEXISTS=TRUE;DB_CLOSE_DELAY=-1;
@@ -55,6 +47,7 @@ default:
   course:
     name: Spring in Action
     chapterCount: 7
+    
 course:
   name: Kafka in Action
   chapterCount: 7
@@ -63,8 +56,8 @@ course:
 
 
 ---
-spring:
-  profiles: release
+#spring:
+  #profiles: release
 
 server:
   port: 8090
