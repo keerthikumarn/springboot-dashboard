@@ -16,7 +16,9 @@ spring:
 
 logging:
   level:
-    org.hibernate: DEBUG
+    #org.hibernate: DEBUG
+    org.springframework.transaction: DEBUG
+    org.hibernate.resource.transaction: DEBUG
     ROOT: info
 
 
@@ -58,9 +60,6 @@ course:
 ---
 #spring:
   #profiles: release
-
-server:
-  port: 8090
 
 default:
   course:
