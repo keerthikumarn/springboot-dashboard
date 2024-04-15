@@ -8,7 +8,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.curator.shaded.com.google.common.util.concurrent.AtomicDouble;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -112,13 +111,13 @@ public class DashboardServiceImpl implements DashboardService {
 		Locale locale = new Locale("en", "US");
 		NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(locale);
 
-		AtomicInteger totalNewOrders = new AtomicInteger(0);
-		AtomicDouble totalRevenue = new AtomicDouble(0.0);
-		AtomicInteger totalShippedOrders = new AtomicInteger(0);
-		AtomicInteger totalReturnInitiatedOrders = new AtomicInteger(0);
+		int totalNewOrders = 0;
+		double totalRevenue = 0;
+		int totalShippedOrders = 0;
+		int totalReturnInitiatedOrders = 0;
 
 		for (OrderCollectionStatus orderCollectionStatus : orderStatusList) {
-			totalNewOrders.getAndAdd(orderCollectionStatus.getNewOrders());
+			totalNewOrders += orderCollectionStatus.getNewOrders();
 			totalRevenue += orderCollectionStatus.getRevenue();
 			totalShippedOrders += orderCollectionStatus.getShipped();
 			totalReturnInitiatedOrders += orderCollectionStatus.getReturned();
@@ -126,7 +125,7 @@ public class DashboardServiceImpl implements DashboardService {
 
 		orderStatusMap.put("totalNewOrders", totalNewOrders);
 		orderStatusMap.put("totalRevenue", currencyFormat.format(totalRevenue));
-		orderStatusMap.put("totalShippedOrders", totalShippedOders);
+		orderStatusMap.put("totalShippedOrders", totalShippedOrders);
 		orderStatusMap.put("totalReturnInitiatedOrders", totalReturnInitiatedOrders);
 		return null;
 	}
@@ -138,7 +137,7 @@ public class DashboardServiceImpl implements DashboardService {
 
 	@Override
 	public EmployeeInfo getEmployee(String pk) {
-		return null;
+		return employeeInfoRepo.findByPk(pk);
 	}
 
 	@Override
