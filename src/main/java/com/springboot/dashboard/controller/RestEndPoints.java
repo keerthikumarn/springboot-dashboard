@@ -5,7 +5,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.dashboard.model.Course;
@@ -37,7 +40,16 @@ public class RestEndPoints {
 		result.put("rating", courseConfiguration.rating() + "");
 		return result;
 	}
-	
-	
+
+	@RequestMapping("/course")
+	public Course getEndpoint(@RequestParam(value = "name", defaultValue = "Spring Boot", required = false) String name,
+			@RequestParam(value = "chapterCount", defaultValue = "2", required = false) int chapterCount) {
+		return new Course(name, chapterCount);
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/course")
+	public String saveCourse(@RequestBody Course course) {
+		return "your course " + course.name() + " with " + course.chapterCount() + " has saved successfully.";
+	}
 
 }
