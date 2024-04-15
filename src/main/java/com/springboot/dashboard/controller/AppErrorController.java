@@ -2,12 +2,12 @@ package com.springboot.dashboard.controller;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
@@ -19,20 +19,24 @@ import jakarta.servlet.http.HttpServletRequest;
 public class AppErrorController implements ErrorController {
 
 	private final static String ERROR_PATH = "/error";
-
-	@Autowired
+	
 	private ErrorAttributes errorAttributes;
 
-	@GetMapping(value = ERROR_PATH, produces = "text/html")
+	@RequestMapping(value = ERROR_PATH, produces = "text/html")
 	public ModelAndView errorHtml(HttpServletRequest request) {
 		return new ModelAndView("/errors/error", getErrorAttributes(request, false));
 	}
 
-	@GetMapping(value = ERROR_PATH)
+	@RequestMapping(value = ERROR_PATH)
+	@ResponseBody
 	public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
 		Map<String, Object> body = getErrorAttributes(request, getTraceParameter(request));
 		HttpStatus status = getStatus(request);
 		return new ResponseEntity<Map<String, Object>>(body, status);
+	}
+
+	public String getErrorPath() {
+		return ERROR_PATH;
 	}
 
 	private boolean getTraceParameter(HttpServletRequest request) {
@@ -46,6 +50,17 @@ public class AppErrorController implements ErrorController {
 	private Map<String, Object> getErrorAttributes(HttpServletRequest request, boolean includeStackTrace) {
 		WebRequest webRequest = new ServletWebRequest(request);
 		return this.errorAttributes.getErrorAttributes(webRequest, includeStackTrace);
+	}
+
+	private HttpStatus getStatus(HttpServletRequest request) {
+		Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+		if (statusCode != null) {
+			try {
+				return HttpStatus.valueOf(statusCode);
+			} catch (Exception ex) {
+			}
+		}
+		return HttpStatus.INTERNAL_SERVER_ERROR;
 	}
 
 }
