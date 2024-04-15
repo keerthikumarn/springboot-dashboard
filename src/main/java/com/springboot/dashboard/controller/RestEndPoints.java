@@ -1,5 +1,8 @@
 package com.springboot.dashboard.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +27,17 @@ public class RestEndPoints {
 	public Course getDefaultEndpoint() {
 		return new Course(this.name, this.chapterCount);
 	}
+
+	@RequestMapping("/defaultfullcourse")
+	public Map<String, String> getDefaultFullEndpoint() {
+		Map<String, String> result = new HashMap<>();
+		result.put("name", courseConfiguration.name());
+		result.put("author", courseConfiguration.author());
+		result.put("chapterCount", courseConfiguration.chapterCount() + "");
+		result.put("rating", courseConfiguration.rating() + "");
+		return result;
+	}
+	
+	
 
 }
