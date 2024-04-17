@@ -1,44 +1,43 @@
 package com.springboot.dashboard.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "product_category")
 public class ProductCategory extends KeyEntity {
 
-	@Column
-	private String categoryName;
+    @Column
+    private String categoryName;
 
-	@Column
-	private int percentage;
+    @Column
+    private int percentage;
 
-	@Column
-	private boolean bestCategory;
+    @Column
+    private boolean bestCategory;
 
-	public String getCategoryName() {
-		return categoryName;
-	}
+    public String getCategoryName() {
+        return categoryName;
+    }
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
 
-	public int getPercentage() {
-		return percentage;
-	}
+    public int getPercentage() {
+        return percentage;
+    }
 
-	public void setPercentage(int percentage) {
-		this.percentage = percentage;
-	}
+    public void setPercentage(int percentage) {
+        this.percentage = percentage;
+    }
 
-	public boolean isBestCategory() {
-		return bestCategory;
-	}
+    public boolean isBestCategory() {
+        return bestCategory;
+    }
 
-	public void setBestCategory(boolean bestCategory) {
-		this.bestCategory = bestCategory;
-	}
-
+    public void setBestCategory(boolean bestCategory) {
+        this.bestCategory = bestCategory;
+    }
 }

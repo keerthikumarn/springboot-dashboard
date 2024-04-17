@@ -1,33 +1,34 @@
 package com.springboot.dashboard.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "order_received")
-public class OrderReceived extends KeyEntity{
+public class OrderReceived extends KeyEntity {
 
-	@Column
-	private int orderReceived;
+    @Column
+    private int orderReceived;
 
-	@Column
-	private String dateReceived;
+    @Column
+    private String dateReceived;
 
-	public int getOrderReceived() {
-		return orderReceived;
-	}
+    public int getOrderReceived() {
+        return orderReceived;
+    }
 
-	public void setOrderReceived(int orderReceived) {
-		this.orderReceived = orderReceived;
-	}
+    public void setOrderReceived(int orderReceived) {
+        this.orderReceived = orderReceived;
+    }
 
-	public String getDateReceived() {
-		return dateReceived;
-	}
+    public String getDateReceived() {
+        return dateReceived;
+    }
 
-	public void setDateReceived(String dateReceived) {
-		this.dateReceived = dateReceived;
-	}
-
+    public void setDateReceived(String dateReceived) {
+        this.dateReceived = dateReceived;
+    }
 }
