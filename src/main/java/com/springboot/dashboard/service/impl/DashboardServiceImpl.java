@@ -12,7 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.springboot.dashboard.entity.CompanyRevenue;
-import com.springboot.dashboard.entity.EmployeeInfo;
+import com.springboot.dashboard.entity.EmployeeInformation;
 import com.springboot.dashboard.entity.OrderCollectionStatus;
 import com.springboot.dashboard.entity.OrderReceived;
 import com.springboot.dashboard.entity.ProductCategory;
@@ -62,7 +62,7 @@ public class DashboardServiceImpl implements DashboardService {
 	}
 
 	@Override
-	public List<EmployeeInfo> getAllEmployee() {
+	public List<EmployeeInformation> getAllEmployee() {
 		return employeeInfoRepo.findAll();
 	}
 
@@ -154,22 +154,22 @@ public class DashboardServiceImpl implements DashboardService {
 	}
 
 	@Override
-	public EmployeeInfo addEmployee(EmployeeInfo employeeInfo) {
+	public EmployeeInformation addEmployee(EmployeeInformation employeeInfo) {
 		return employeeInfoRepo.save(employeeInfo);
 	}
 
 	@Override
-	public EmployeeInfo getEmployee(String pk) {
+	public EmployeeInformation getEmployee(String pk) {
 		return employeeInfoRepo.findByPk(Long.valueOf(pk));
 	}
 
 	@Override
-	public EmployeeInfo updateEmployee(EmployeeInfo employeeInfo) {
+	public EmployeeInformation updateEmployee(EmployeeInformation employeeInfo) {
 		return employeeInfoRepo.save(employeeInfo);
 	}
 
 	@Override
-	public void deleteEmployee(EmployeeInfo employeeInfo) {
+	public void deleteEmployee(EmployeeInformation employeeInfo) {
 		employeeInfoRepo.delete(employeeInfo);
 	}
 
