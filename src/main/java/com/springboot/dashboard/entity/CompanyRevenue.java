@@ -9,7 +9,7 @@ import javax.persistence.Table;
 public class CompanyRevenue  extends KeyEntity {
 
     @Column(nullable = false)
-    private String month;
+    private String revenueMonth;
 
     @Column(nullable = false)
     private double revenue;
@@ -20,15 +20,15 @@ public class CompanyRevenue  extends KeyEntity {
     @Column
     private double margins;
 
-    public String getMonth() {
-        return month;
-    }
+    public String getRevenueMonth() {
+		return revenueMonth;
+	}
 
-    public void setMonth(String month) {
-        this.month = month;
-    }
+	public void setRevenueMonth(String revenueMonth) {
+		this.revenueMonth = revenueMonth;
+	}
 
-    public double getRevenue() {
+	public double getRevenue() {
         return revenue;
     }
 

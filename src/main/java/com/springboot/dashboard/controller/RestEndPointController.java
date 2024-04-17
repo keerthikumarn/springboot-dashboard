@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.springboot.dashboard.entity.EmployeeInfo;
+import com.springboot.dashboard.entity.EmployeeInformation;
 import com.springboot.dashboard.service.DashboardService;
 
 @RestController
@@ -19,12 +18,12 @@ public class RestEndPointController {
 	private DashboardService dashboardService;
 
 	@RequestMapping("/employee")
-	public List<EmployeeInfo> getAllEmployee() {
+	public List<EmployeeInformation> getAllEmployee() {
 		return dashboardService.getAllEmployee();
 	}
 
 	@RequestMapping(value = "/employee", method = RequestMethod.POST)
-	public String employeeAdd(@RequestBody EmployeeInfo employeeInfo) {
+	public String employeeAdd(@RequestBody EmployeeInformation employeeInfo) {
 		if (dashboardService.addEmployee(employeeInfo) != null) {
 			return "Employee data saved successfully";
 		} else {
