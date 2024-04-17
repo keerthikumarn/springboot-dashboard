@@ -1,54 +1,54 @@
 package com.springboot.dashboard.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "company_revenue")
-public class CompanyRevenue extends KeyEntity {
+public class CompanyRevenue  extends KeyEntity {
 
-	@Column(nullable = false)
-	private String revenueMonth;
+    @Column(nullable = false)
+    private String month;
 
-	@Column(nullable = false)
-	private double revenue;
+    @Column(nullable = false)
+    private double revenue;
 
-	@Column
-	private double expense;
+    @Column
+    private double expense;
 
-	@Column
-	private double margins;
+    @Column
+    private double margins;
 
-	public String getRevenueMonth() {
-		return revenueMonth;
-	}
+    public String getMonth() {
+        return month;
+    }
 
-	public void setRevenueMonth(String revenueMonth) {
-		this.revenueMonth = revenueMonth;
-	}
+    public void setMonth(String month) {
+        this.month = month;
+    }
 
-	public double getRevenue() {
-		return revenue;
-	}
+    public double getRevenue() {
+        return revenue;
+    }
 
-	public void setRevenue(double revenue) {
-		this.revenue = revenue;
-	}
+    public void setRevenue(double revenue) {
+        this.revenue = revenue;
+    }
 
-	public double getExpense() {
-		return expense;
-	}
+    public double getExpense() {
+        return expense;
+    }
 
-	public void setExpense(double expense) {
-		this.expense = expense;
-	}
+    public void setExpense(double expense) {
+        this.expense = expense;
+    }
 
-	public double getMargins() {
-		return margins;
-	}
+    public double getMargins() {
+        return margins;
+    }
 
-	public void setMargins(double margins) {
-		this.margins = margins;
-	}
+    public void setMargins(double margins) {
+        this.margins = margins;
+    }
 }
