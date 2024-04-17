@@ -17,7 +17,7 @@ import com.springboot.dashboard.entity.OrderCollectionStatus;
 import com.springboot.dashboard.entity.OrderReceived;
 import com.springboot.dashboard.entity.ProductCategory;
 import com.springboot.dashboard.repository.CompanyRevenueRepository;
-import com.springboot.dashboard.repository.EmployeeInfoRepository;
+import com.springboot.dashboard.repository.EmployeeInformationRepository;
 import com.springboot.dashboard.repository.OrderCollectionStatusRepository;
 import com.springboot.dashboard.repository.OrderReceivedRepository;
 import com.springboot.dashboard.repository.ProductCategoryRepository;
@@ -39,7 +39,7 @@ public class DashboardServiceImpl implements DashboardService {
 	private OrderCollectionStatusRepository orderCollectionStatusRepo;
 
 	@Autowired
-	private EmployeeInfoRepository employeeInfoRepo;
+	private EmployeeInformationRepository employeeInfoRepo;
 
 	@Override
 	public List<CompanyRevenue> getTodayRevenueDashSimple() {
@@ -160,7 +160,7 @@ public class DashboardServiceImpl implements DashboardService {
 
 	@Override
 	public EmployeeInformation getEmployee(String pk) {
-		return employeeInfoRepo.findByPk(Long.valueOf(pk));
+		return employeeInfoRepo.findByPk(pk);
 	}
 
 	@Override
