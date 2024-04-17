@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.springboot.dashboard.entity.CompanyRevenue;
-import com.springboot.dashboard.entity.EmployeeInfo;
+import com.springboot.dashboard.entity.EmployeeInformation;
 import com.springboot.dashboard.entity.OrderCollectionStatus;
 import com.springboot.dashboard.entity.OrderReceived;
 import com.springboot.dashboard.entity.ProductCategory;
@@ -19,7 +19,7 @@ public interface DashboardService {
 
 	List<OrderCollectionStatus> getOrderCollectionSimple();
 
-	List<EmployeeInfo> getAllEmployee();
+	List<EmployeeInformation> getAllEmployee();
 
 	Map<String, Object> getTodayRevenueDash();
 
@@ -29,12 +29,12 @@ public interface DashboardService {
 
 	Map<String, Object> getOrderCollection();
 
-	EmployeeInfo addEmployee(EmployeeInfo employeeInfo);
+	EmployeeInformation addEmployee(EmployeeInformation employeeInfo);
 
-	EmployeeInfo getEmployee(final String pk);
+	EmployeeInformation getEmployee(final String pk);
 
-	EmployeeInfo updateEmployee(EmployeeInfo employeeInfo);
+	EmployeeInformation updateEmployee(EmployeeInformation employeeInfo);
 
-	void deleteEmployee(EmployeeInfo employeeInfo);
+	void deleteEmployee(EmployeeInformation employeeInfo);
 
 }
